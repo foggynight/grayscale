@@ -44,8 +44,8 @@ if __name__ == '__main__':
             video_fps,
             (video_width, video_height))
 
-    print(f'Input path:   {input_path}')
-    print(f'Output path:  {output_path}')
+    print(f'Reading: {input_path}')
+    print(f'Writing: {output_path}')
     print('Converting to grayscale...')
 
     while (frame := read_frame(source)) is not None:
