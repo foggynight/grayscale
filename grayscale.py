@@ -33,8 +33,8 @@ if __name__ == '__main__':
         exit(1)
 
     video_fps = float(source.get(cv2.CAP_PROP_FPS))
-    video_width = int(source.get(3))
-    video_height = int(source.get(4))
+    video_width = int(source.get(cv2.CAP_PROP_FRAME_WIDTH))
+    video_height = int(source.get(cv2.CAP_PROP_FRAME_HEIGHT))
 
     destination = cv2.VideoWriter(
             output_path,
