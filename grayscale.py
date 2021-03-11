@@ -20,11 +20,16 @@ def read_frame(source):
     return frame if ret else None
 
 if __name__ == '__main__':
-    video_path = argv[1]
+    input_path = argv[1]
+    output_path = argv[2]
 
-    source = cv2.VideoCapture(video_path)
+    print(f"Input path:   {input_path}")
+    print(f"Output path:  {output_path}")
+    print(f"Converting to grayscale...")
+
+    source = cv2.VideoCapture(input_path)
     if (source.isOpened() == False):
-        print(f"grayscale: error: failed to open '{video_path}'")
+        print(f"grayscale: error: failed to open '{input_path}'")
         exit(1)
 
     video_fps = float(source.get(cv2.CAP_PROP_FPS))
@@ -32,7 +37,7 @@ if __name__ == '__main__':
     video_height = int(source.get(4))
 
     destination = cv2.VideoWriter(
-            'output.mp4',
+            output_path,
             cv2.VideoWriter_fourcc(*'mp4v'),
             video_fps,
             (video_width, video_height))
