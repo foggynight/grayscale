@@ -12,11 +12,7 @@ from sys import argv
 import cv2
 
 def read_frame(source):
-    if not source.isOpened():
-        return None
-
     ret, frame = source.read()
-
     return frame if ret else None
 
 if __name__ == '__main__':
