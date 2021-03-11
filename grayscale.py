@@ -11,6 +11,14 @@ from sys import argv
 
 import cv2
 
+def read_frame(source):
+    if not source.isOpened():
+        return None
+
+    ret, frame = source.read()
+
+    return frame if ret else None
+
 if __name__ == '__main__':
     video_path = argv[1]
 
@@ -29,12 +37,7 @@ if __name__ == '__main__':
             video_fps,
             (video_width, video_height))
 
-    while source.isOpened():
-        ret, frame = source.read()
-
-        if not ret:
-            break
-
+    while (frame := read_frame(source)) is not None:
         # The frame must be in the BGR format to be written to file. The
         # following converts to GRAY and back to BGR, making the frame
         # grayscale while allowing it to be written to file.
