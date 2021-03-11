@@ -23,10 +23,6 @@ if __name__ == '__main__':
     input_path = argv[1]
     output_path = argv[2]
 
-    print(f"Input path:   {input_path}")
-    print(f"Output path:  {output_path}")
-    print(f"Converting to grayscale...")
-
     source = cv2.VideoCapture(input_path)
     if (source.isOpened() == False):
         print(f"grayscale: error: failed to open '{input_path}'")
@@ -41,6 +37,10 @@ if __name__ == '__main__':
             cv2.VideoWriter_fourcc(*'mp4v'),
             video_fps,
             (video_width, video_height))
+
+    print(f'Input path:   {input_path}')
+    print(f'Output path:  {output_path}')
+    print('Converting to grayscale...')
 
     while (frame := read_frame(source)) is not None:
         # The frame must be in the BGR format to be written to file. The
