@@ -2,6 +2,11 @@
 
 Convert an image or video to grayscale.
 
+## Dependencies
+
+- python3 and pip3: `sudo apt install python3 pip3`
+- OpenCV for Python: `pip3 install opencv-python`
+
 ## License
 
 Copyright (C) 2021 Robert Coffey
