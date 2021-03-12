@@ -14,7 +14,7 @@ import cv2
 def parse_argv():
     argc = len(argv)
     if argc < 3 or argc > 3:
-        print('grayscale: invalid arguments')
+        print('grayscale: error: invalid arguments')
         print('usage: grayscale INPUT_PATH OUTPUT_PATH')
         exit(1)
 
@@ -30,7 +30,7 @@ def parse_argv():
 def get_extension(path):
     split_path = path.split('.')
     if len(split_path) < 2:
-        print(f'grayscale: invalid file path: {path}')
+        print(f'grayscale: error: invalid file path: {path}')
         exit(1)
 
     return split_path[-1]
@@ -38,7 +38,7 @@ def get_extension(path):
 def convert_image(input_path, output_path):
     img = cv2.imread(input_path, 0)
     if img is None:
-        print(f'grayscale: failed to open: {input_path}')
+        print(f'grayscale: error: failed to open: {input_path}')
         exit(1)
 
     cv2.imwrite(output_path, img)
@@ -46,7 +46,7 @@ def convert_image(input_path, output_path):
 def get_video_handles(input_path, output_path):
     source = cv2.VideoCapture(input_path)
     if (source.isOpened() == False):
-        print(f'grayscale: failed to open: {input_path}')
+        print(f'grayscale: error: failed to open: {input_path}')
         exit(1)
 
     destination = cv2.VideoWriter(
@@ -80,7 +80,7 @@ if __name__ == '__main__':
     input_extension = get_extension(input_path)
 
     if input_extension != get_extension(output_path):
-        print('grayscale: input and output file extensions must not differ')
+        print('grayscale: error: input and output file extensions differ')
         exit(1)
 
     if input_extension in image_extensions:
@@ -88,4 +88,4 @@ if __name__ == '__main__':
     elif input_extension in video_extensions:
         convert_video(input_path, output_path)
     else:
-        print(f'grayscale: invalid file extension: {input_extension}')
+        print(f'grayscale: error: invalid input file extension: {input_extension}')
