@@ -18,7 +18,14 @@ def parse_argv():
         print('usage: grayscale INPUT_PATH OUTPUT_PATH')
         exit(1)
 
-    return argv[1], argv[2]  # input_path, output_path
+    input_path = argv[1]
+    output_path = argv[2]
+
+    print(f'Reading: {input_path}')
+    print(f'Writing: {output_path}')
+    print('Converting to grayscale...')
+
+    return input_path, output_path
 
 def get_extension(path):
     split_path = path.split('.')
@@ -49,10 +56,6 @@ def read_frame(source):
 if __name__ == '__main__':
     input_path, output_path = parse_argv()
     source, destination = get_video_handles(input_path, output_path)
-
-    print(f'Reading: {input_path}')
-    print(f'Writing: {output_path}')
-    print('Converting to grayscale...')
 
     while (frame := read_frame(source)) is not None:
         # The frame must be in the BGR format to be written to file. The
