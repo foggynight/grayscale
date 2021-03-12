@@ -35,6 +35,14 @@ def get_extension(path):
 
     return split_path[-1]
 
+def convert_image(input_path, output_path):
+    img = cv2.imread(input_path, 0)
+    if img is None:
+        print(f'grayscale: failed to open: {input_path}')
+        exit(1)
+
+    cv2.imwrite(output_path, img)
+
 def get_video_handles(input_path, output_path):
     source = cv2.VideoCapture(input_path)
     if (source.isOpened() == False):
@@ -76,7 +84,7 @@ if __name__ == '__main__':
         exit(1)
 
     if input_extension in image_extensions:
-        pass
+        convert_image(input_path, output_path)
     elif input_extension in video_extensions:
         convert_video(input_path, output_path)
     else:
