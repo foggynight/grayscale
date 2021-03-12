@@ -33,7 +33,7 @@ def get_extension(path):
         print(f"grayscale: invalid file path '{path}'")
         exit(1)
 
-    return split_path[::-1]
+    return split_path[-1]
 
 def get_video_handles(input_path, output_path):
     source = cv2.VideoCapture(input_path)
