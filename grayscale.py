@@ -30,7 +30,7 @@ def parse_argv():
 def get_extension(path):
     split_path = path.split('.')
     if len(split_path) < 2:
-        print(f"grayscale: invalid filepath '{path}'")
+        print(f"grayscale: invalid file path '{path}'")
         exit(1)
 
     return split_path[::-1]
