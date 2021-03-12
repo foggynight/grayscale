@@ -11,6 +11,20 @@ from sys import argv
 
 import cv2
 
+def get_video_handles(input_path, output_path):
+    source = cv2.VideoCapture(input_path)
+    if (source.isOpened() == False):
+        print(f"grayscale: error: failed to open '{input_path}'")
+        exit(1)
+
+    destination = cv2.VideoWriter(
+            output_path,
+            cv2.VideoWriter_fourcc(*'mp4v'),
+            float(source.get(cv2.CAP_PROP_FPS)),
+            (int(source.get(cv2.CAP_PROP_FRAME_WIDTH)), int(source.get(cv2.CAP_PROP_FRAME_HEIGHT))))
+
+    return source, destination
+
 def read_frame(source):
     ret, frame = source.read()
     return frame if ret else None
@@ -25,20 +39,7 @@ if __name__ == '__main__':
     input_path = argv[1]
     output_path = argv[2]
 
-    source = cv2.VideoCapture(input_path)
-    if (source.isOpened() == False):
-        print(f"grayscale: error: failed to open '{input_path}'")
-        exit(1)
-
-    video_fps = float(source.get(cv2.CAP_PROP_FPS))
-    video_width = int(source.get(cv2.CAP_PROP_FRAME_WIDTH))
-    video_height = int(source.get(cv2.CAP_PROP_FRAME_HEIGHT))
-
-    destination = cv2.VideoWriter(
-            output_path,
-            cv2.VideoWriter_fourcc(*'mp4v'),
-            video_fps,
-            (video_width, video_height))
+    source, destination = get_video_handles(input_path, output_path)
 
     print(f'Reading: {input_path}')
     print(f'Writing: {output_path}')
@@ -50,7 +51,5 @@ if __name__ == '__main__':
         # grayscale while allowing it to be written to file.
         destination.write(cv2.cvtColor(cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY), cv2.COLOR_GRAY2BGR))
 
-    destination.release()
-    source.release()
-
+    source.release(), destination.release()
     cv2.destroyAllWindows()
