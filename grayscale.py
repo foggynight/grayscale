@@ -30,7 +30,7 @@ def parse_argv():
 def get_extension(path):
     split_path = path.split('.')
     if len(split_path) < 2:
-        print(f"grayscale: invalid file path '{path}'")
+        print(f'grayscale: invalid file path: {path}')
         exit(1)
 
     return split_path[-1]
@@ -38,7 +38,7 @@ def get_extension(path):
 def get_video_handles(input_path, output_path):
     source = cv2.VideoCapture(input_path)
     if (source.isOpened() == False):
-        print(f"grayscale: error: failed to open '{input_path}'")
+        print(f'grayscale: failed to open: {input_path}')
         exit(1)
 
     destination = cv2.VideoWriter(
