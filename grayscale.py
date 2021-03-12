@@ -71,6 +71,10 @@ if __name__ == '__main__':
     input_path, output_path = parse_argv()
     input_extension = get_extension(input_path)
 
+    if input_extension != get_extension(output_path):
+        print('grayscale: input and output file extensions must not differ')
+        exit(1)
+
     if input_extension in image_extensions:
         pass
     elif input_extension in video_extensions:
