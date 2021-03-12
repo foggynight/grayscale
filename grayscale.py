@@ -11,6 +11,15 @@ from sys import argv
 
 import cv2
 
+def parse_argv():
+    argc = len(argv)
+    if argc < 3 or argc > 3:
+        print('grayscale: invalid arguments')
+        print('usage: grayscale INPUT_PATH OUTPUT_PATH')
+        exit(1)
+
+    return argv[1], argv[2]
+
 def get_video_handles(input_path, output_path):
     source = cv2.VideoCapture(input_path)
     if (source.isOpened() == False):
@@ -30,15 +39,7 @@ def read_frame(source):
     return frame if ret else None
 
 if __name__ == '__main__':
-    argc = len(argv)
-    if argc < 3 or argc > 3:
-        print('grayscale: invalid arguments')
-        print('usage: grayscale INPUT_PATH OUTPUT_PATH')
-        exit(1)
-
-    input_path = argv[1]
-    output_path = argv[2]
-
+    input_path, output_path = parse_argv()
     source, destination = get_video_handles(input_path, output_path)
 
     print(f'Reading: {input_path}')
