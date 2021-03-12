@@ -64,4 +64,3 @@ if __name__ == '__main__':
         destination.write(cv2.cvtColor(cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY), cv2.COLOR_GRAY2BGR))
 
     source.release(), destination.release()
-    cv2.destroyAllWindows()
