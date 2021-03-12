@@ -18,7 +18,7 @@ def parse_argv():
         print('usage: grayscale INPUT_PATH OUTPUT_PATH')
         exit(1)
 
-    return argv[1], argv[2]
+    return argv[1], argv[2]  # input_path, output_path
 
 def get_video_handles(input_path, output_path):
     source = cv2.VideoCapture(input_path)
