@@ -53,8 +53,7 @@ def read_frame(source):
     ret, frame = source.read()
     return frame if ret else None
 
-if __name__ == '__main__':
-    input_path, output_path = parse_argv()
+def convert_video(input_path, output_path):
     source, destination = get_video_handles(input_path, output_path)
 
     while (frame := read_frame(source)) is not None:
@@ -64,3 +63,17 @@ if __name__ == '__main__':
         destination.write(cv2.cvtColor(cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY), cv2.COLOR_GRAY2BGR))
 
     source.release(), destination.release()
+
+if __name__ == '__main__':
+    image_extensions = ['png']
+    video_extensions = ['mp4']
+
+    input_path, output_path = parse_argv()
+    input_extension = get_extension(input_path)
+
+    if input_extension in image_extensions:
+        pass
+    elif input_extension in video_extensions:
+        convert_video(input_path, output_path)
+    else:
+        print(f'grayscale: invalid file extension: {input_extension}')
