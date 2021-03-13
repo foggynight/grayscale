@@ -2,6 +2,14 @@
 
 Convert an image or video to grayscale.
 
+**Note:** Currently only supports the PNG and MP4 formats.
+
+## Usage
+
+```bash
+./grayscale.py INPUT_PATH OUTPUT_PATH
+```
+
 ## Dependencies
 
 - python3 and pip3: `sudo apt install python3 pip3`
