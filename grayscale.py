@@ -11,12 +11,16 @@ from sys import argv
 
 import cv2
 
+def error(*message):
+    for line in message:
+        print(line)
+    exit(1)
+
 def parse_argv():
     argc = len(argv)
     if argc < 3 or argc > 3:
-        print('grayscale: error: invalid arguments')
-        print('usage: grayscale INPUT_PATH OUTPUT_PATH')
-        exit(1)
+        error('grayscale: error: invalid arguments',
+              'usage: grayscale INPUT_PATH OUTPUT_PATH')
 
     input_path = argv[1]
     output_path = argv[2]
@@ -30,24 +34,21 @@ def parse_argv():
 def get_extension(path):
     split_path = path.split('.')
     if len(split_path) < 2:
-        print(f'grayscale: error: invalid file path: {path}')
-        exit(1)
+        error(f'grayscale: error: invalid file path: {path}')
 
     return split_path[-1]
 
 def convert_image(input_path, output_path):
     img = cv2.imread(input_path, 0)
     if img is None:
-        print(f'grayscale: error: failed to open: {input_path}')
-        exit(1)
+        error(f'grayscale: error: failed to open: {input_path}')
 
     cv2.imwrite(output_path, img)
 
 def get_video_handles(input_path, output_path):
     source = cv2.VideoCapture(input_path)
     if (source.isOpened() == False):
-        print(f'grayscale: error: failed to open: {input_path}')
-        exit(1)
+        error(f'grayscale: error: failed to open: {input_path}')
 
     destination = cv2.VideoWriter(
             output_path,
@@ -80,12 +81,11 @@ if __name__ == '__main__':
     input_extension = get_extension(input_path)
 
     if input_extension != get_extension(output_path):
-        print('grayscale: error: input and output file extensions differ')
-        exit(1)
+        error('grayscale: error: input and output file extensions differ')
 
     if input_extension in image_extensions:
         convert_image(input_path, output_path)
     elif input_extension in video_extensions:
         convert_video(input_path, output_path)
     else:
-        print(f'grayscale: error: invalid input file extension: {input_extension}')
+        error(f'grayscale: error: invalid input file extension: {input_extension}')
