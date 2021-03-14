@@ -2,7 +2,7 @@
 
 # *** grayscale ***
 #
-# Convert an image or video to grayscale.
+# Convert images or videos to grayscale.
 #
 # Copyright (C) 2021 Robert Coffey
 # Released under the MIT license
