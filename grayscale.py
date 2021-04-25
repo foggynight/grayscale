@@ -5,7 +5,7 @@
 # Convert images or videos to grayscale.
 #
 # Copyright (C) 2021 Robert Coffey
-# Released under the MIT license
+# Released under the GPLv2 license
 
 from sys import argv
 
