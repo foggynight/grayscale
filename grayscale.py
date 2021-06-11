@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-# *** grayscale ***
+# --- grayscale ---
 #
 # Convert images or videos to grayscale.
 #
@@ -67,8 +67,8 @@ def convert_video(input_path, output_path):
 
     while (frame := read_frame(source)) is not None:
         # The frame must be in the BGR format to be written to file. The
-        # following converts to GRAY and back to BGR, making the frame
-        # grayscale while allowing it to be written to file.
+        # following converts to GRAY and back to BGR, making the frame grayscale
+        # while allowing it to be written to file.
         destination.write(cv2.cvtColor(cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY), cv2.COLOR_GRAY2BGR))
 
     source.release(), destination.release()
