@@ -45,7 +45,7 @@ def get_extension(path):
 
 
 def convert_image(input_path, output_path):
-    img = cv2.imread(input_path, 0)
+    img = cv2.imread(input_path, cv2.IMREAD_GRAYSCALE)
     if img is None:
         error(f'grayscale: error: failed to open: {input_path}')
 
