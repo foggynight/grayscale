@@ -9,9 +9,11 @@
 # Released under the GPLv2 license
 ##
 
+import os
 from sys import argv
 
 import cv2
+import moviepy.editor as mp
 
 
 def error(*message):
@@ -64,8 +66,9 @@ def read_frame(source):
     return frame if ret else None
 
 
-def convert_video(input_path, output_path):
-    source, destination = get_video_handles(input_path, output_path)
+def convert_video(input_path):
+    silent_path = '__silent_' + input_path
+    source, destination = get_video_handles(input_path, silent_path)
     print('Converting video to grayscale...')
     while (frame := read_frame(source)) is not None:
         # The frame must be in the BGR format to be written to file. The
@@ -73,6 +76,21 @@ def convert_video(input_path, output_path):
         # while allowing it to be written to file.
         destination.write(cv2.cvtColor(cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY), cv2.COLOR_GRAY2BGR))
     source.release(), destination.release()
+    return silent_path
+
+
+def get_audio(input_path):
+    audio_path = '__audio_' + ''.join(input_path.split('.')[:-1]) + '.wav'
+    mp.VideoFileClip(input_path).audio.write_audiofile(audio_path)
+    return audio_path
+
+
+def add_audio(audio_path, silent_path, output_path):
+    video_clip = mp.VideoFileClip(silent_path)
+    audio_clip = mp.AudioFileClip(audio_path)
+    video_clip.audio = audio_clip
+    print('Adding original audio to converted video...')
+    video_clip.write_videofile(output_path, logger=None)
 
 
 if __name__ == '__main__':
@@ -88,6 +106,10 @@ if __name__ == '__main__':
     if input_extension in image_extensions:
         convert_image(input_path, output_path)
     elif input_extension in video_extensions:
-        convert_video(input_path, output_path)
+        audio_path = get_audio(input_path)
+        silent_path = convert_video(input_path)
+        add_audio(audio_path, silent_path, output_path)
+        os.remove(audio_path)
+        os.remove(silent_path)
     else:
         error(f'grayscale: error: invalid input file extension: {input_extension}')
