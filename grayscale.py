@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-# --- grayscale ---
+# --- grayscale.py ---
 #
 # Convert images or videos to grayscale.
 #
