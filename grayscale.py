@@ -11,10 +11,12 @@ from sys import argv
 
 import cv2
 
+
 def error(*message):
     for line in message:
         print(line)
     exit(1)
+
 
 def parse_argv():
     argc = len(argv)
@@ -31,6 +33,7 @@ def parse_argv():
 
     return input_path, output_path
 
+
 def get_extension(path):
     split_path = path.split('.')
     if len(split_path) < 2:
@@ -38,12 +41,14 @@ def get_extension(path):
 
     return split_path[-1]
 
+
 def convert_image(input_path, output_path):
     img = cv2.imread(input_path, 0)
     if img is None:
         error(f'grayscale: error: failed to open: {input_path}')
 
     cv2.imwrite(output_path, img)
+
 
 def get_video_handles(input_path, output_path):
     source = cv2.VideoCapture(input_path)
@@ -58,9 +63,11 @@ def get_video_handles(input_path, output_path):
 
     return source, destination
 
+
 def read_frame(source):
     ret, frame = source.read()
     return frame if ret else None
+
 
 def convert_video(input_path, output_path):
     source, destination = get_video_handles(input_path, output_path)
@@ -72,6 +79,7 @@ def convert_video(input_path, output_path):
         destination.write(cv2.cvtColor(cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY), cv2.COLOR_GRAY2BGR))
 
     source.release(), destination.release()
+
 
 if __name__ == '__main__':
     image_extensions = ['png']
