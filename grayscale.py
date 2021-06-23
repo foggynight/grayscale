@@ -1,11 +1,13 @@
 #!/usr/bin/env python3
 
+##
 # --- grayscale.py ---
 #
 # Convert images or videos to grayscale.
 #
 # Copyright (C) 2021 Robert Coffey
 # Released under the GPLv2 license
+##
 
 from sys import argv
 
