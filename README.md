@@ -14,8 +14,8 @@ Convert images or videos to grayscale.
 
 ## Dependencies
 
-- python3 and pip3: `sudo apt install python3 pip3`
-- OpenCV for Python: `pip3 install opencv-python`
+- OpenCV: `pip3 install opencv-python`
+- MoviePy: `pip3 install moviepy`
 
 
 ## License
