@@ -1,20 +1,10 @@
 #!/usr/bin/env python3
 
-##
-# --- grayscale.py ---
-#
-# Convert images or videos to grayscale.
-#
-# Copyright (C) 2021 Robert Coffey
-# Released under the GPLv2 license
-##
-
 import os
 from sys import argv
 
 import cv2
 import moviepy.editor as mp
-
 
 def error(*message):
     for line in message:
