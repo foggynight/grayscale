@@ -1,5 +1,7 @@
 # grayscale
 
+## Description
+
 Convert images or videos to grayscale.
 
 **Note:** Currently only supports the PNG and MP4 formats.
