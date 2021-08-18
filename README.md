@@ -2,23 +2,20 @@
 
 ## Description
 
-Convert images or videos to grayscale.
+Convert images and videos to grayscale.
 
 **Note:** Currently only supports the PNG and MP4 formats.
 
-
 ## Usage
 
-```bash
-./grayscale.py INPUT_PATH OUTPUT_PATH
+```sh
+grayscale.py INPUT_PATH OUTPUT_PATH
 ```
-
 
 ## Dependencies
 
 - OpenCV: `pip3 install opencv-python`
 - MoviePy: `pip3 install moviepy`
-
 
 ## License
 
